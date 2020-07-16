@@ -20,4 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::resources([
     'groups' => 'Api\GroupController',
+    'tasks' => 'Api\TaskController',
+    'images' => 'Api\ImageController',
 ]);
+Route::post('images/upload', 'Api\ImageController@upload');
