@@ -21,6 +21,7 @@ class AddImageGroupsAndGroupTasksTables extends Migration
         Schema::create('image_downloads', function (Blueprint $table) {
             $table->id()->unsigned();
             $table->string('url');
+            $table->string('name');
             $table->string('path');
             $table->string('groups');
             $table->integer('image_id')->unsigned();

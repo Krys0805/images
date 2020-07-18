@@ -14,7 +14,7 @@ class Download extends Model
      * @var array
      */
     protected $fillable = [
-        'url', 'path', 'image_id', 'groups',
+        'url', 'name', 'path', 'image_id', 'groups',
     ];
 
     /**
