@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Image;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Group extends Model
+class Download extends Model
 {
-    protected $table = 'groups';
+    protected $table = 'image_downloads';
 
     /**
      * The attributes that are mass assignable.
@@ -14,7 +14,7 @@ class Group extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
+        'url', 'path', 'image_id', 'groups',
     ];
 
     /**
@@ -23,9 +23,4 @@ class Group extends Model
      * @var array
      */
     protected $hidden = [];
-
-    public function tasks()
-    {
-        return $this->hasMany(Group\Task::class, 'group_id');
-    }
 }

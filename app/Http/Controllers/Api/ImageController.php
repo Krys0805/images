@@ -6,10 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ImageRequest;
 use App\Http\Resources\ImageCollection;
 use App\Http\Resources\ImageResource;
+use App\Jobs\DownloadImage;
+use App\Jobs\ProcessImageTasks;
+use App\Models\Group;
 use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class ImageController extends Controller
 {
@@ -82,19 +85,26 @@ class ImageController extends Controller
         $result = [];
         $paths = $request->json('paths', []);
 
-        $groups = $request->json('groups', []);
-        if (empty($groups)) {
-            return response(null, 404);
-        }
+        $groupsIds = $request->json('groups', []);
+        $groups = Group::query()->whereIn('id', $groupsIds)->orWhereIn('name', $groupsIds)->get();
 
         foreach ($request->files as $path => $files) {
             $i = 0;
             /** @var UploadedFile $file */
             foreach ($files as $file) {
+                $imageStoragePath = !empty($paths[$path]) ? $paths[$path] : $path;
+                if (!$file instanceof UploadedFile && filter_var($file, FILTER_VALIDATE_URL)) {
+                    DownloadImage::dispatch(Image\Download::create([
+                        'url' => $file,
+                        'path' => $imageStoragePath,
+                        'groups' => json_encode($groupsIds),
+                    ]))->onQueue('image_downloads');
+                    continue;
+                }
                 $ext = $file->getClientOriginalExtension();
                 $img = [
                     'name' => $i++ . '.' . $ext,
-                    'path' => 'images/' . (!empty($paths[$path]) ? $paths[$path] : $path),
+                    'path' => 'images/' . $imageStoragePath,
                     'ext' => $ext,
                     'mime' => $file->getClientMimeType(),
                     'group_id' => 0,
@@ -103,28 +113,20 @@ class ImageController extends Controller
                 if (!in_array($ext, ['pdf', 'jpg', 'png', 'docx'])) {
                     return response(null, 404);
                 }
+                DB::beginTransaction();
                 try {
-                    Image::create($img);
                     $file->storeAs($img['path'], $img['name'], 'public');
+                    $image = Image::create($img);
+                    $image->groups()->attach($groups);
+                    ProcessImageTasks::dispatch($image)->onQueue('image_tasks');
                     $result[] = $img;
+                    DB::commit();
                 } catch (\Exception $e) {
+                    DB::rollBack();
                     return response($e->getMessage(), 500);
                 }
             }
         }
         return response($result, 200);
-    }
-
-    protected function addTasks(array $groups)
-    {
-        // get groups if exists by name
-
-        // get tasks if groups nor empty
-
-        // create job handleImageTasks
-        // dispatch image to job HERE - e/g/  // add tasks in queue
-        // set queue with Redis
-
-        // !!! need to create groups-tasks threw admin area
     }
 }
