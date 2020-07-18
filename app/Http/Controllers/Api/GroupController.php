@@ -8,11 +8,20 @@ use App\Http\Resources\GroupCollection;
 use App\Http\Resources\GroupResource;
 use App\Models\Group;
 
+/**
+ * @OA\Info(title="My First API", version="0.1")
+ */
+
 class GroupController extends Controller
 {
 
     /**
      * Display a listing of the resource.
+     *
+     * @OA\Get(
+     *     path="/api/groups",
+     *     @OA\Response(response="200", description="Ok")
+     * )
      *
      * @return GroupCollection
      */
@@ -23,6 +32,11 @@ class GroupController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     *
+     * @OA\Post(
+     *     path="/api/groups",
+     *     @OA\Response(response="201", description="Ok")
+     * )
      *
      * @param  GroupRequest  $request
      * @return GroupResource
@@ -37,6 +51,11 @@ class GroupController extends Controller
     /**
      * Display the specified resource.
      *
+     * @OA\Get(
+     *     path="/api/groups/{group}",
+     *     @OA\Response(response="200", description="Ok")
+     * )
+     *
      * @param Group $group
      * @return GroupResource
      */
@@ -47,6 +66,11 @@ class GroupController extends Controller
 
     /**
      * Update the specified resource in storage.
+     *
+     * @OA\Patch(
+     *     path="/api/groups",
+     *     @OA\Response(response="200", description="Ok")
+     * )
      *
      * @param  GroupRequest  $request
      * @param Group $group
@@ -60,6 +84,11 @@ class GroupController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     *
+     * @OA\Delete(
+     *     path="/api/groups",
+     *     @OA\Response(response="204", description="Ok")
+     * )
      *
      * @param Group $group
      * @return \Illuminate\Http\Response

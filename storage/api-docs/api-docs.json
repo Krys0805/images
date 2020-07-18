@@ -1,0 +1,167 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "My First API",
+        "version": "0.1"
+    },
+    "paths": {
+        "/api/groups": {
+            "get": {
+                "summary": "Display a listing of the resource.",
+                "operationId": "App\\Http\\Controllers\\Api\\GroupController::index",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Store a newly created resource in storage.",
+                "operationId": "App\\Http\\Controllers\\Api\\GroupController::store",
+                "responses": {
+                    "201": {
+                        "description": "Ok"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Remove the specified resource from storage.",
+                "operationId": "App\\Http\\Controllers\\Api\\GroupController::destroy",
+                "responses": {
+                    "204": {
+                        "description": "Ok"
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Update the specified resource in storage.",
+                "operationId": "App\\Http\\Controllers\\Api\\GroupController::update",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    }
+                }
+            }
+        },
+        "/api/groups/{group}": {
+            "get": {
+                "summary": "Display the specified resource.",
+                "operationId": "App\\Http\\Controllers\\Api\\GroupController::show",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    }
+                }
+            }
+        },
+        "/api/images": {
+            "get": {
+                "summary": "Display a listing of the resource.",
+                "operationId": "App\\Http\\Controllers\\Api\\ImageController::index",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Store a newly created resource in storage.",
+                "operationId": "App\\Http\\Controllers\\Api\\ImageController::store",
+                "responses": {
+                    "201": {
+                        "description": "Ok"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Remove the specified resource from storage.",
+                "operationId": "App\\Http\\Controllers\\Api\\ImageController::destroy",
+                "responses": {
+                    "204": {
+                        "description": "Ok"
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Update the specified resource in storage.",
+                "operationId": "App\\Http\\Controllers\\Api\\ImageController::update",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    }
+                }
+            }
+        },
+        "/api/images/{image}": {
+            "get": {
+                "summary": "Display the specified resource.",
+                "operationId": "App\\Http\\Controllers\\Api\\ImageController::show",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    }
+                }
+            }
+        },
+        "/api/images/upload": {
+            "post": {
+                "summary": "Upload images",
+                "operationId": "App\\Http\\Controllers\\Api\\ImageController::upload",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    }
+                }
+            }
+        },
+        "/api/tasks": {
+            "get": {
+                "summary": "Display a listing of the resource.",
+                "operationId": "App\\Http\\Controllers\\Api\\TaskController::index",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Store a newly created resource in storage.",
+                "operationId": "App\\Http\\Controllers\\Api\\TaskController::store",
+                "responses": {
+                    "201": {
+                        "description": "Ok"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Remove the specified resource from storage.",
+                "operationId": "App\\Http\\Controllers\\Api\\TaskController::destroy",
+                "responses": {
+                    "204": {
+                        "description": "Ok"
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Update the specified resource in storage.",
+                "operationId": "App\\Http\\Controllers\\Api\\TaskController::update",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    }
+                }
+            }
+        },
+        "/api/tasks/{task}": {
+            "get": {
+                "summary": "Display the specified resource.",
+                "operationId": "App\\Http\\Controllers\\Api\\TaskController::show",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    }
+                }
+            }
+        }
+    }
+}

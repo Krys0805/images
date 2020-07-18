@@ -20,6 +20,11 @@ class ImageController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @OA\Get(
+     *     path="/api/images",
+     *     @OA\Response(response="200", description="Ok")
+     * )
+     *
      * @return ImageCollection
      */
     public function index()
@@ -29,6 +34,11 @@ class ImageController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     *
+     * @OA\Post(
+     *     path="/api/images",
+     *     @OA\Response(response="201", description="Ok")
+     * )
      *
      * @param  ImageRequest  $request
      * @return ImageResource
@@ -43,6 +53,11 @@ class ImageController extends Controller
     /**
      * Display the specified resource.
      *
+     * @OA\Get(
+     *     path="/api/images/{image}",
+     *     @OA\Response(response="200", description="Ok")
+     * )
+     *
      * @param Image $image
      * @return ImageResource
      */
@@ -53,6 +68,11 @@ class ImageController extends Controller
 
     /**
      * Update the specified resource in storage.
+     *
+     * @OA\Patch(
+     *     path="/api/images",
+     *     @OA\Response(response="200", description="Ok")
+     * )
      *
      * @param  ImageRequest  $request
      * @param Image $image
@@ -67,6 +87,11 @@ class ImageController extends Controller
     /**
      * Remove the specified resource from storage.
      *
+     * @OA\Delete(
+     *     path="/api/images",
+     *     @OA\Response(response="204", description="Ok")
+     * )
+     *
      * @param Image $image
      * @return \Illuminate\Http\Response
      */
@@ -78,6 +103,13 @@ class ImageController extends Controller
     }
 
     /**
+     * Upload images
+     *
+     * @OA\Post(
+     *     path="/api/images/upload",
+     *     @OA\Response(response="200", description="Ok")
+     * )
+     *
      * @param Request $request
      */
     public function upload(Request $request)

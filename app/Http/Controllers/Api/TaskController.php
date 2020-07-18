@@ -14,6 +14,11 @@ class TaskController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @OA\Get(
+     *     path="/api/tasks",
+     *     @OA\Response(response="200", description="Ok")
+     * )
+     *
      * @return TaskCollection
      */
     public function index()
@@ -23,6 +28,11 @@ class TaskController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     *
+     * @OA\Post(
+     *     path="/api/tasks",
+     *     @OA\Response(response="201", description="Ok")
+     * )
      *
      * @param  TaskRequest $request
      * @return TaskResource
@@ -37,6 +47,11 @@ class TaskController extends Controller
     /**
      * Display the specified resource.
      *
+     * @OA\Get(
+     *     path="/api/tasks/{task}",
+     *     @OA\Response(response="200", description="Ok")
+     * )
+     *
      * @param Task $task
      * @return TaskResource
      */
@@ -47,6 +62,11 @@ class TaskController extends Controller
 
     /**
      * Update the specified resource in storage.
+     *
+     * @OA\Patch(
+     *     path="/api/tasks",
+     *     @OA\Response(response="200", description="Ok")
+     * )
      *
      * @param  TaskRequest $request
      * @param Task $task
@@ -60,6 +80,11 @@ class TaskController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     *
+     * @OA\Delete(
+     *     path="/api/tasks",
+     *     @OA\Response(response="204", description="Ok")
+     * )
      *
      * @param Task $task
      * @return \Illuminate\Http\Response
