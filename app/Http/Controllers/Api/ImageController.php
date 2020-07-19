@@ -124,13 +124,12 @@ class ImageController extends Controller
             $i = 0;
             /** @var UploadedFile $file */
             foreach ($files as $file) {
-                $i++;
                 $imageStoragePath = !empty($paths[$path]) ? $paths[$path] : $path;
                 if (!$file instanceof UploadedFile) {
                     if (filter_var($file, FILTER_VALIDATE_URL)) {
                         DownloadImage::dispatch(Image\Download::create([
                             'url' => $file,
-                            'name' => $i,
+                            'name' => $i++,
                             'path' => $imageStoragePath,
                             'groups' => json_encode($groupsIds),
                         ]))->onQueue('image_downloads');
@@ -139,7 +138,7 @@ class ImageController extends Controller
                 }
                 $ext = $file->getClientOriginalExtension();
                 $img = [
-                    'name' => $i . '.' . $ext,
+                    'name' => $i++ . '.' . $ext,
                     'path' => 'images/' . $imageStoragePath,
                     'ext' => $ext,
                     'mime' => $file->getClientMimeType(),
